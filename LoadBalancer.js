@@ -13,18 +13,73 @@ export default class LoadBalancer {
     // }
     // Los datos son de solo lectura y se actualizan durante la simulación.
     this.servers = Object.freeze([...servers]);
+    this.next = 0;
   }
 
   async onRequestArrival(request, sendToServer) {
+    const server = this.server[this.next];
+
+
+    const Cola1 = this.servers[0].queuedRequests;
+    const Cola2 = this.servers[1].queuedRequests;
+    const Cola3 = this.servers[2].queuedRequests;
+    const Cola4 = this.servers[3].queuedRequests;
+
+
+    if (Cola1 === null) {
+
+      server = 0:
+      
+    }
+
+    if (Cola2 === null) {
+
+      server = 1:
+      
+    }
+
+    if (Cola3 === null) {
+
+      server = 3:
+      
+    }
+
+    if (Cola4 === null) {
+
+      server= 4:
+      
+    }
+
+
+
+
+
+    return sendToServer(server.id);
+    
+
+
     // Ejemplo de la petición que llega:
     // {
     //   id: "request-17",
     //   payload: "08319462", // Datos que envía el cliente
     //   work: 4              // Unidades de trabajo necesarias
     // }
-    const server = this.servers[0];
 
-    // Envía la petición al servidor y devuelve su respuesta al cliente.
-    return sendToServer(server.id);
+  
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
