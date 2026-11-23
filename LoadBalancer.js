@@ -13,7 +13,8 @@ export default class LoadBalancer {
     //   activeProgress: 0.25 // Progreso de 0 a 1 (0 si está libre)
     // }
     // Los datos son de solo lectura y se actualizan durante la simulación.
-    this.servers = Object.freeze([...servers]);
+    this.servers=servers;
+    this.next=0;
   }
 
   async onRequestArrival(request, sendToServer) {
@@ -23,15 +24,9 @@ export default class LoadBalancer {
     //   payload: "08319462", // Datos que envía el cliente
     //   work: 4              // Unidades de trabajo necesarias
     // }
-
-    switch(scenarios.name){
-      case ("1) Servidores iguales"):
-        for (let i=0; i<this.servers.length;i++)
-
-    }
-    const server = this.servers[0];
-
+        const server= this.servers[this.next];
+        this.next=(this.next + 1) % this.servers.length;
+        return sendToServer(server.id);
     // Envía la petición al servidor y devuelve su respuesta al cliente.
-    return sendToServer(server.id);
   }
 }
