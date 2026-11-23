@@ -15,6 +15,7 @@ export default class LoadBalancer {
     // Los datos son de solo lectura y se actualizan durante la simulación.
     this.servers=servers;
     this.next=0;
+    this.numax=0;
   }
 
   async onRequestArrival(request, sendToServer) {
@@ -24,9 +25,15 @@ export default class LoadBalancer {
     //   payload: "08319462", // Datos que envía el cliente
     //   work: 4              // Unidades de trabajo necesarias
     // }
-        const server= this.servers[this.next];
-        this.next=(this.next + 1) % this.servers.length;
-        return sendToServer(server.id);
+        const servidores=map(this.servers);
+        const servidordesc= servidores.toSorted((a,b) => b.power - a.power);
+        function balanceador(){
+            let numax = 10;
+            
+        }
+
+        return sendToServer(server.id)
+  
     // Envía la petición al servidor y devuelve su respuesta al cliente.
   }
 }
